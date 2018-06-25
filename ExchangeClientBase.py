@@ -33,3 +33,7 @@ class BaseExchangeClient:
             self.blogic.refreshAssetDB(symbolsFromAPI, self.exchangeName)
         else:
             print ("On " + self.exchangeName + " all the same. Amount of assets is: " + str(len(currentExchangeSymbols)))
+            
+    def deleteBTC(self):
+        self.blogic.deleteBTC(self.exchangeName)    
+    

@@ -21,6 +21,7 @@ print('----Start process asset on exchanges----')
 print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 try:
+    binanceChecker.deleteBTC()
     binanceChecker.checkListedAssets()
 except Exception:
     print("binanceChecker.checkListedAssets error request")    
