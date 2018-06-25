@@ -18,6 +18,3 @@ class KucoinChecker(BaseExchangeClient):
                 symbols.add( (item['coin'], self.exchangeName ) )
         return symbols
     
-    def deleteBTC(self):
-        self.blogic.deleteBTC(self.exchangeName)    
-    
