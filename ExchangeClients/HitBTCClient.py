@@ -5,7 +5,7 @@ from ExchangeAPIImpl.HitBTCAPIImpl import Client
 from ExchangeClients.ExchangeClientBase import BaseExchangeClient
 
 
-class HitBTCChecker(BaseExchangeClient):
+class HitBTCLogic(BaseExchangeClient):
 
     def __init__(self, api_key="1", api_secret="2"):
         super().__init__("hitbtc", api_key, api_secret)

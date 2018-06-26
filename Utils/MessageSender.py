@@ -1,10 +1,7 @@
 import telegram
 import pprint
-from enum import Enum
 
-class MessageType(Enum):
-    CONSOLE = 1
-    TELEGRAM = 2
+from Utils.Enums import MessageType
 
 class MessageSender:
     def __init__(self, type):

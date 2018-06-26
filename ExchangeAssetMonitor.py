@@ -2,53 +2,34 @@
 # -*- coding: utf-8 -*-
 
 import json
-from Utils.MessageSender import *
-from ExchangeClients.BinanceClient import BinanceChecker
-from ExchangeClients.KucoinClient import KucoinChecker
-from ExchangeClients.BitfinexClient import BitfinexChecker
-from ExchangeClients.HitBTCClient import HitBTCChecker
-from ExchangeClients.IdexClient import IdexChecker
-import pprint
+from Utils.MessageSender import MessageType
+from ExchangeClients.BinanceClient import BinanceLogic
+from ExchangeClients.KucoinClient import KucoinLogic
+from ExchangeClients.BitfinexClient import BitfinexLogic
+from ExchangeClients.HitBTCClient import HitBTCLogic
+from ExchangeClients.IdexClient import IdexLogic
+from Utils.Enums import *
 import datetime
 
 
 class AssetMonitor:
     def __init__(self):     
-        self.binanceChecker = BinanceChecker()
-        self.kucoinChecker = KucoinChecker()
-        self.bitfinexChecker = BitfinexChecker()
-        self.hitBTCChecker = HitBTCChecker()
-        self.idexChecker = IdexChecker()
+        self.exchangeClients={Exchange.BINANCE: BinanceLogic(),
+                              Exchange.KUCOIN: KucoinLogic(),
+                              Exchange.BITFINEX: BitfinexLogic(),
+                              Exchange.HITBTC: HitBTCLogic(),
+                              Exchange.IDEX: IdexLogic()
+                            }
         
     def CheckAsset(self):
         
-        print('----Start process asset on exchanges----')
-        print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-
-        try:
-            self.binanceChecker.checkListedAssets()
-        except Exception as e:
-            print("binanceChecker.checkListedAssets error request. Exception " + str(e))    
-
-        try:
-            self.kucoinChecker.checkListedAssets()
-        except Exception:
-            print("kucoinChecker.checkListedAssets error request")    
-
-        try:
-            self.bitfinexChecker.checkListedAssets();
-        except Exception:
-            print("bitfinexChecker.checkListedAssets error request")    
-
-        try:
-            self.hitBTCChecker.checkListedAssets()
-        except Exception:
-            print("hitBTCChecker.checkListedAssets error request")    
-
-        try:
-            self.idexChecker.checkListedAssets()
-        except Exception:
-            print("idexChecker.checkListedAssets error request")    
+        print('%s  ----Start process asset on exchanges----' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        
+        for key, value in self.exchangeClients.items():
+            try:
+                value.checkListedAssets()
+            except Exception as e:
+                print("%s.checkListedAssets error request. Exception %s" % (value.__class__.__name__, str(e)))       
 
         print('----End process----')
         

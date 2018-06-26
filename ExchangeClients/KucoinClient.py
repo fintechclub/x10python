@@ -1,9 +1,10 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+
 from kucoin.client import Client 
 from ExchangeClients.ExchangeClientBase import BaseExchangeClient
 
-class KucoinChecker(BaseExchangeClient):
+class KucoinLogic(BaseExchangeClient):
 
     def __init__(self, api_key="1", api_secret="2"):
         super().__init__("kucoin", api_key, api_secret)

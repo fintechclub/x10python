@@ -7,7 +7,7 @@ import pprint
 
 # Bitfinex API documenntation  
 # https://docs.bitfinex.com/docs/introduction
-class BitfinexChecker(BaseExchangeClient):
+class BitfinexLogic(BaseExchangeClient):
 
     def __init__(self, api_key="1", api_secret="2"):
         super().__init__("bitfinex", api_key, api_secret)
@@ -19,10 +19,20 @@ class BitfinexChecker(BaseExchangeClient):
         symbols = set([])
         for item in data:
             if item not in symbols:
-                symbols.add( (item, self.exchangeName ) )
+                symbols.add( (item.upper(), self.exchangeName ) )
+        
         return symbols
     
-    def getTicker(self):
-        return
+    def getTickers(self):
+        symbols = self.blogic.getAssetsFromDB(self.exchangeName)
+        convert_first_to_generator = ("t"+item[0].upper() for item in symbols)
+        assetsStr = ",".join(convert_first_to_generator)
+        
+        tickers = self.bitfinexClient.get_tickers(assetsStr)
+        result = set([])
+        for item in tickers:
+            result.add( ( (item[0])[1:], round(item[7], 6)  ))
+        
+        return result
         
         

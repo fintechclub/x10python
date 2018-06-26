@@ -5,7 +5,7 @@
 from idex.client import Client
 from ExchangeClients.ExchangeClientBase import BaseExchangeClient
 
-class IdexChecker(BaseExchangeClient):
+class IdexLogic(BaseExchangeClient):
 
     def __init__(self, api_key="0x0000000000000000000000000000000000000000", api_secret="0xvxdlk4xjau61mzedukz40us75qqxm9uahimpn912rmm36ai1d45sn7wx4qg6uhaw"):
         super().__init__("idex", api_key, api_secret)

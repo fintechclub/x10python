@@ -4,7 +4,8 @@
 
 import sqlite3
 from Blogic import BusinessLogic
-from Utils.MessageSender import MessageSender, MessageType
+from Utils.MessageSender import MessageSender
+from Utils.Enums import *
 
 class BaseExchangeClient:
     
@@ -13,7 +14,7 @@ class BaseExchangeClient:
         self.blogic = BusinessLogic()
         self.api_key = api_key
         self.api_secret = api_secret
-        self.messageSender = MessageSender(MessageType.CONSOLE)
+        self.messageSender = MessageSender(MessageType.TELEGRAM)
 
     def getExchangeName(self):
         return self.exchangeName
@@ -22,7 +23,7 @@ class BaseExchangeClient:
     def checkListedAssets(self):
         symbolsFromAPI =  self.getSymbolsFromExchange()
         currentExchangeSymbols =  self.blogic.getAssetsFromDB(self.exchangeName)
-
+        
         newListedAssets = set(symbolsFromAPI).difference(currentExchangeSymbols)
         convert_first_to_generator = (item[0] for item in newListedAssets)
         newListedAssetsStr = ", ".join(convert_first_to_generator)

@@ -6,7 +6,7 @@ from ExchangeClients.ExchangeClientBase import BaseExchangeClient
 
 # Binance API documenntation  
 # https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md
-class BinanceChecker(BaseExchangeClient):
+class BinanceLogic(BaseExchangeClient):
     
     def __init__(self, api_key="1", api_secret="2"):
         super().__init__("binance", api_key, api_secret)
