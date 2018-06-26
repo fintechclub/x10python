@@ -1,6 +1,10 @@
+
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import sqlite3
 from Blogic import BusinessLogic
-import MessageSender
+from Utils.MessageSender import MessageSender, MessageType
 
 class BaseExchangeClient:
     
@@ -9,6 +13,7 @@ class BaseExchangeClient:
         self.blogic = BusinessLogic()
         self.api_key = api_key
         self.api_secret = api_secret
+        self.messageSender = MessageSender(MessageType.CONSOLE)
 
     def getExchangeName(self):
         return self.exchangeName
@@ -26,8 +31,8 @@ class BaseExchangeClient:
         convert_first_to_generator = (item[0] for item in delistedAssets)
         newDelistedAssetsStr = ", ".join(convert_first_to_generator)
         
-        if len(newListedAssetsStr) > 0: MessageSender.sendMessage("Нашел новые активы на " + self.exchangeName + ": " + newListedAssetsStr )
-        if len(newDelistedAssetsStr) > 0: MessageSender.sendMessage("Кажется произошел делистинг некоторых активов на " + self.exchangeName+ ": " + newDelistedAssetsStr)
+        if len(newListedAssetsStr) > 0: self.messageSender.sendMessage("Нашел новые активы на " + self.exchangeName + ": " + newListedAssetsStr )
+        if len(newDelistedAssetsStr) > 0: self.messageSender.sendMessage("Кажется произошел делистинг некоторых активов на " + self.exchangeName+ ": " + newDelistedAssetsStr)
         
         if len(newListedAssetsStr) > 0 or len(newDelistedAssetsStr) > 0:
             self.blogic.refreshAssetDB(symbolsFromAPI, self.exchangeName)

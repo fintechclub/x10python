@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 from kucoin.client import Client 
-from ExchangeClientBase import BaseExchangeClient
+from ExchangeClients.ExchangeClientBase import BaseExchangeClient
 
 class KucoinChecker(BaseExchangeClient):
 

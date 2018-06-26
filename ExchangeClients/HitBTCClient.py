@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-from HitBTCAPIImpl import Client
-from ExchangeClientBase import BaseExchangeClient
-import pprint
+
+from ExchangeAPIImpl.HitBTCAPIImpl import Client
+from ExchangeClients.ExchangeClientBase import BaseExchangeClient
+
 
 class HitBTCChecker(BaseExchangeClient):
 
