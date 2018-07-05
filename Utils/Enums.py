@@ -10,3 +10,4 @@ class Exchange(Enum):
     HITBTC = 3
     KUCOIN = 4
     IDEX = 5
+    OKEX = 6

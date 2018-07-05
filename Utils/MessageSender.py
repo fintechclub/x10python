@@ -5,8 +5,9 @@ from Utils.Enums import MessageType
 
 class MessageSender:
     def __init__(self, type):
-        self.telegram_bot = telegram.Bot("345714559:AAFattmHvDEHenQLbI5wgTvE0Lhord_aYpQ")
         self.m_type = type
+        if self.m_type == MessageType.TELEGRAM:
+            self.telegram_bot = telegram.Bot("345714559:AAFattmHvDEHenQLbI5wgTvE0Lhord_aYpQ")
     
     def sendMessage(self, msg):
         if self.m_type == MessageType.TELEGRAM:
