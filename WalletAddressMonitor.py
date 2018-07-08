@@ -61,10 +61,10 @@ class WalletAddressChecker:
                 continue
             if dataFromDB.get(key) > balance: 
                 isChange = 1 
-                text = '\n'.join([text, "С адреса {0:s} {1:s} отправлено {2:.4f} BTC ".format(key, walletTitle, balance - dataFromDB[key])] ) 
+                text = '\n'.join([text, "С адреса {0:s} {1:s} отправлено {2:.8f} BTC ".format(key, walletTitle, balance - dataFromDB[key])] ) 
             elif dataFromDB.get(key) < balance: 
                 isChange = 1 
-                text = '\n'.join([text,  "Адрес {0:s} {1:s} получил {2:.4f} BTC".format(key, walletTitle, balance - dataFromDB[key])] )
+                text = '\n'.join([text,  "Адрес {0:s} {1:s} получил {2:.8f} BTC".format(key, walletTitle, balance - dataFromDB[key])] )
 
         if  isChange > 0:
             self.blogic.refreshWalletsTable([(k, v[0], v[1]) for k, v in recent_data.items()])
