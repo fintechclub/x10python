@@ -4,10 +4,11 @@ import json
 import pprint
 import time
 import datetime
-
-
+from termcolor import colored
+import sys
 
 def callback(msg):
+    
     global last_time
     global sellOrders
     global buyOrders
@@ -68,7 +69,58 @@ def callback(msg):
         last_time = cur_time
         last_price = cur_price
     
+def callback2(msg):
+    global data
+    global last_time
     
+    if not msg['m']:
+        data["order_buy"] += 1  
+        data["q_buy"] += float(msg['q'])
+    else:
+        data["order_sell"] += 1 
+        data["q_sell"] += float(msg['q'])
+         
+    data["max_price"] = max(float(msg['p']), data["max_price"])
+    data["min_price"] = min(float(msg['p']), data["min_price"])
+    
+    cur_time = int(msg['E'])
+    
+    if cur_time - last_time > time_frame_sec * 1000:
+        utc_time = time.localtime(msg['E']/1000)
+        str_cur_time = time.strftime("%Y-%m-%d %H:%M:%S", utc_time)
+    
+        print("time: %s, order_buy: %d, order_sell: %d, q_buy: %.4f, q_sell: %.4f, min_price: %.2f, max_price: %.2f, max_min_ratio: %.4f" % (str_cur_time, data["order_buy"], data["order_sell"], data["q_buy"], data["q_sell"], data["min_price"], data["max_price"], data["max_price"]/data["min_price"]-1))
+        last_time = cur_time
+        
+        data={"order_buy":0,
+         "order_sell":0,
+         "q_buy": 0,
+         "q_sell":0,
+         "max_price":0,
+         "min_price":sys.maxsize
+         }
+        
+    '''
+    color = "green" if not msg['m'] else "red"                    
+    utc_time = time.localtime(msg['E']/1000)
+    str_cur_time = time.strftime("%Y-%m-%d %H:%M:%S", utc_time)
+    
+    
+    if float(msg['q']) > 1:
+        print(colored("p: %s, q: %s, t: %s" % (msg['p'], msg['q'], str_cur_time) , color, attrs=['bold']))
+    else:
+        print(colored("p: %s, q: %s, t: %s" % (msg['p'], msg['q'], str_cur_time) , color))
+    '''      
+        
+        
+data={"order_buy":0,
+     "order_sell":0,
+     "q_buy": 0,
+     "q_sell":0,
+     "max_price":0,
+     "min_price": sys.maxsize
+     }    
+
 sellOrders = {}
 buyOrders  = {}
 total_data = {"first_price": 0, 
@@ -86,6 +138,7 @@ trade_pair = 'BTCUSDT'
 client = Client("api_key", "api_secret")
 bm = BinanceSocketManager(client)
 # start any sockets here, i.e a trade socket
-conn_key = bm.start_trade_socket(trade_pair, callback)
+#conn_key = bm.start_trade_socket(trade_pair, callback)
+key2 = bm.start_aggtrade_socket(trade_pair, callback2)
 # then start the socket manager
 bm.start()
