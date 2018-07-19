@@ -1,7 +1,6 @@
 import telegram
+from x10project.utils.enums import MessageType
 import pprint
-
-from Utils.Enums import MessageType
 
 class MessageSender:
     def __init__(self, type):

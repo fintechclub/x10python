@@ -4,18 +4,19 @@
 import blockcypher
 import pprint
 import json
-import Blogic
 import collections
-from Utils.MessageSender import MessageSender
-from Utils.Enums import MessageType
-from Utils.StopWatch import Timer
 import datetime
+from x10project import DataBaseAccess
+from x10project.utils.messagesender import MessageSender
+from x10project.utils.enums import MessageType
+from x10project.utils.stopwatch import Timer
 
-class WalletAddressChecker:
+
+class WalletAddressMonitor:
     
     def __init__(self): 
-        self.blogic = Blogic.BusinessLogic()
-        self.messageSender = MessageSender(MessageType.TELEGRAM)
+        self.dba = DataBaseAccess()
+        self.messageSender = MessageSender(MessageType.CONSOLE)
         self.wallets = dict({
             "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r": "wallet: Bitfinex-coldwallet",
             "16ftSEQ4ctQFDtVZiUBusQUjRrGhM3JYwe": "wallet: Binance-wallet",
@@ -44,7 +45,7 @@ class WalletAddressChecker:
         timer.start()
         
         recent_data = {}
-        dataFromDB = dict(self.blogic.getWalletsTable())
+        dataFromDB = dict(self.dba.getWalletsTable())
     
         # Получить обновление балансов по проверяемым кошелькам 
         for address, title in self.wallets.items():
@@ -67,7 +68,7 @@ class WalletAddressChecker:
                 text = '\n'.join([text,  "Адрес {0:s} {1:s} получил {2:.8f} BTC".format(key, walletTitle, balance - dataFromDB[key])] )
 
         if  isChange > 0:
-            self.blogic.refreshWalletsTable([(k, v[0], v[1]) for k, v in recent_data.items()])
+            self.dba.refreshWalletsTable([(k, v[0], v[1]) for k, v in recent_data.items()])
             self.messageSender.sendMessage(text)
         
         print('----End process WalletAddressChecker.CheckWallets. Time is %s ----' % timer.stop())

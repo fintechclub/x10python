@@ -112,7 +112,7 @@ def callback2(msg):
         print(colored("p: %s, q: %s, t: %s" % (msg['p'], msg['q'], str_cur_time) , color))
     '''      
         
-        
+
 data={"order_buy":0,
      "order_sell":0,
      "q_buy": 0,

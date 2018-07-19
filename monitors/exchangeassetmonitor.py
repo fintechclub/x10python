@@ -2,14 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import json
-from Utils.MessageSender import MessageType
-from ExchangeClients.BinanceClient import BinanceLogic
-from ExchangeClients.KucoinClient import KucoinLogic
-from ExchangeClients.BitfinexClient import BitfinexLogic
-from ExchangeClients.HitBTCClient import HitBTCLogic
-from ExchangeClients.IdexClient import IdexLogic
-from ExchangeClients.OkexClient import OkexLogic
-from Utils.Enums import *
+from x10project import BinanceLogic, KucoinLogic, BitfinexLogic, HitBTCLogic, IdexLogic, OkexLogic
+from x10project.utils.messagesender import MessageSender
+from x10project.utils.enums import Exchange
 import datetime
 import pprint
 

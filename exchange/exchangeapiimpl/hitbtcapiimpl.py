@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import requests
 
-class Client(object):
+class HitBTCClient(object):
     def __init__(self, public_key, secret):
         self.url = "https://api.hitbtc.com/api/2"
         self.session = requests.session()

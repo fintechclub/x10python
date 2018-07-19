@@ -1,10 +1,12 @@
 import sqlite3
+import os
 
 
-class BusinessLogic: 
+class DataBaseAccess: 
     
     def __init__(self):
-        self.__dataBaseName = "assets.db"
+        package_dir = os.path.abspath(os.path.dirname(__file__))
+        self.__dataBaseName = os.path.join(package_dir, 'assets.db')
         self.db_connection = sqlite3.connect(self.__dataBaseName)  # или :memory: чтобы сохранить в RAM
         self.__initScheme()
         
