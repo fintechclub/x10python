@@ -25,7 +25,7 @@ class PortfolioMonitor:
                                                                                   'https://www.googleapis.com/auth/drive'])
         httpAuth = credentials.authorize(Http())
         self.service = build('sheets', 'v4', http = httpAuth)
-        self.messageSender = MessageSender(MessageType.CONSOLE)
+        self.messageSender = MessageSender(MessageType.TELEGRAM)
         
 
     def getAssetAmount(self):

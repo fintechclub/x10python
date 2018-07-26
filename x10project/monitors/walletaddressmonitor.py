@@ -16,7 +16,7 @@ class WalletAddressMonitor:
     
     def __init__(self): 
         self.dba = DataBaseAccess()
-        self.messageSender = MessageSender(MessageType.CONSOLE)
+        self.messageSender = MessageSender(MessageType.TELEGRAM)
         self.wallets = dict({
             "3D2oetdNuZUqQHPJmcMDDHYoqkyNVsFk9r": "wallet: Bitfinex-coldwallet",
             "16ftSEQ4ctQFDtVZiUBusQUjRrGhM3JYwe": "wallet: Binance-wallet",
