@@ -1,4 +1,4 @@
-from x10project import BaseExchangeBL, BittrexClient 
+from x10project import BaseExchangeBL 
 from bittrex.bittrex import *
 
 #https://github.com/ericsomdahl/python-bittrex

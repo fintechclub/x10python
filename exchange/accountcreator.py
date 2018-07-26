@@ -1,4 +1,5 @@
 from x10project import BitfinexLogic
+from x10project import BittrexLogic
 
 class AccountCreator:
     def __init__(self):
@@ -12,7 +13,10 @@ class AccountCreator:
                                                  'tS4woU82QpuKnBNORId8XbCWN6ZhOklHWSyckJvPO46'),
                       'pokrov': BittrexLogic('Покровский', 
                                                 'a1ab591819dd4789a6f0bc4e762caa9d',	
-                                                'ecf2d128ed614816b0ab4abbb6ce80e9')}
+                                                'ecf2d128ed614816b0ab4abbb6ce80e9'),
+                      'igor': BittrexLogic('Игорь', 
+                                                '64fa097eb78c40338301fd1cd8df61ed',	
+                                                '574d13a6749749ad90ee94621084f6a0')}
         
         
     def getAccount(self, code):

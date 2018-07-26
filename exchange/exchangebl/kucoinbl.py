@@ -6,7 +6,7 @@ from x10project import BaseExchangeBL
 
 class KucoinLogic(BaseExchangeBL):
 
-    def __init__(self, account_name, api_key='', api_secret=''):
+    def __init__(self, account_name='', api_key='', api_secret=''):
         super().__init__("kucoin", account_name, api_key, api_secret)
         self.kucoinClient = KucoinClient(self.api_key, self.api_secret)
               
