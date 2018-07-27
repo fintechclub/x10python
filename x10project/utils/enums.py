@@ -11,3 +11,9 @@ class Exchange(Enum):
     KUCOIN = 4
     IDEX = 5
     OKEX = 6
+    
+class TelegramRecipient(Enum):
+    ARBITRAGE_GROUP="-318829342"
+    PORTFOLIO_OBSERVER_GROUP="-230337089"
+    KOROVAEV_USER="194302348"
+         

@@ -1,5 +1,5 @@
 from binance.websockets import BinanceSocketManager
-from binance.client import Client
+from binance.client import Client as BinanceClient
 import json
 import pprint
 import time
@@ -111,7 +111,15 @@ def callback2(msg):
     else:
         print(colored("p: %s, q: %s, t: %s" % (msg['p'], msg['q'], str_cur_time) , color))
     '''      
-        
+    
+
+def UserEventCallback(msg):
+    
+    
+    
+    
+    
+    
 
 data={"order_buy":0,
      "order_sell":0,
@@ -135,10 +143,11 @@ last_price = 0
 trade_pair = 'BTCUSDT'
 
 
-client = Client("api_key", "api_secret")
+client = BinanceClient("cpVoAC6GOvchaOtNKEBevnKypS2ruQoz5VMoCZHmF2GqoiVkaQiHGO8eFObwXkPn", "xaLFuFrLUL89pnXRTwKcLggT7HgLD3rcKSzWGza6ZHE9twsvD5HsQqwrRGJHGWQO")
 bm = BinanceSocketManager(client)
 # start any sockets here, i.e a trade socket
 #conn_key = bm.start_trade_socket(trade_pair, callback)
 key2 = bm.start_aggtrade_socket(trade_pair, callback2)
+key_user = bm.start_user_socket(UserEventCallback)
 # then start the socket manager
 bm.start()
