@@ -2,3 +2,4 @@
 *.pyc
 assets.db
 console.log
+google_service_account.json
