@@ -70,7 +70,8 @@ class BitfinexLogic(BaseExchangeBL):
             amount = item[2]
             base_price = item[3]
             pl = item[6]
-            positions_list.append( (pair, amount, base_price, pl) )
+            price_liq = item[8]
+            positions_list.append( (pair, amount, base_price, pl, price_liq) )
         
         return positions_list
 
@@ -87,22 +88,33 @@ class BitfinexLogic(BaseExchangeBL):
 
         return orders_list
     
-    def _positionToString(self, positions):
+    def _positionToString(self, positions, prices):
         
         result=''
         for item in positions:
-            result += '🔹 Инстумент: {:s},\n   Количество: {:.2f},\n   Базовая цена: {:s},\n   PL: {:s}\n'.format(item[0], 
-                                                                                                    item[1],
-                                                                                                    locale.currency(item[2], grouping=True),
-                                                                                                    locale.currency(item[3], grouping=True))
+            result += '🔹 Инстумент: {:s},\n   Количество: {:.2f},\n   Базовая цена: {:s},\n   Текущая цена: {:s},\n   Цена ликвидации: {:s},\n   PL: {:s}\n'.format(item[0], 
+                            item[1],
+                            locale.currency(item[2], grouping=True),
+                            locale.currency(prices[item[0]], grouping=True),
+                            locale.currency(item[4], grouping=True),
+                            locale.currency(item[3], grouping=True))
+        return result
+    
+    def getTickers(self, symbols):
+        tickers_api = self.bitfinexClient.get_tickers(symbols)
+        result = dict()
+        for item in tickers_api:
+            result[item[0]] = item[10]
+            
         return result
         
-    
+        
     def getCommonAccountInfo(self):
         balance = self.getBalance()
         positions = self.getPositions()
         orders = self.getOrders()
-
+        prices = self.getTickers(','.join(x[0] for x in positions))
+        
         checkError = "Не удалось прочитать данные по указанным API ключам" if balance == None or orders == None or positions == None else ''
         
         if checkError != '': 
@@ -117,7 +129,7 @@ class BitfinexLogic(BaseExchangeBL):
         pl = sum(x[3] for x in positions) 
         commonProfit = self.calculateAccountStopLostRisk(balance, orders)
         return "\nОткрыто позиций: {:d}, \nДанные по позициям: \n{:s} \nБаланс аккаунта: {:s}, \nPL: {:s},  \nБаланс(PL): {:s} ({:.2f}%), \nОбщий риск баланса по стопам: {:.2f}% \n".format(len(positions),  
-                 self._positionToString(positions),
+                 self._positionToString(positions, prices),
                  locale.currency(balance, grouping=True), 
                  locale.currency(pl, grouping=True), 
                  locale.currency(balance + pl, grouping=True), 

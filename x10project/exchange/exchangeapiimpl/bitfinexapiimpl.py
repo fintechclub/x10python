@@ -60,7 +60,7 @@ class BitfinexClient:
         return self._reqP("symbols", self.API_V1)
 
     def get_tickers(self, symbols):
-        return self._reqP("tickers?symbols=%s" % (symbols), self.API_V1)
+        return self._reqP("tickers?symbols=%s" % (symbols), self.API_V2)
 
     def get_orders(self):
         return self._reqA("auth/r/orders")
