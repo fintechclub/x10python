@@ -91,7 +91,7 @@ class BitfinexLogic(BaseExchangeBL):
         
         result=''
         for item in positions:
-            result += '🔹 Инстумент: {:s}, Количество: {:.2f}, Базовая цена: {:s}, PL: {:s}\n'.format(item[0], 
+            result += '🔹 Инстумент: {:s},\n   Количество: {:.2f},\n   Базовая цена: {:s},\n   PL: {:s}\n'.format(item[0], 
                                                                                                     item[1],
                                                                                                     locale.currency(item[2], grouping=True),
                                                                                                     locale.currency(item[3], grouping=True))
