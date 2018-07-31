@@ -3,7 +3,7 @@ from x10project import BittrexLogic
 
 class AccountCreator:
     def __init__(self):
-        self.accounts={'usd_p1': BitfinexLogic('Bitfinex USD', 
+        self.accounts={'andrey': BitfinexLogic('Bitfinex USD', 
                                                  'vpSFVZbAyllcTKiCNOMi5hMKJgUusqAZV2LUoQ6wohR',             'aU5vcSwaNdpBchIPWuACUvx4mntghvQB3zBcj8KLV9d'),
                       'rustam':  BitfinexLogic('Аккаунт Рустама', 
                                                  'ldRMGd9EJSBFBsqiY3PAOJQFhfajnqh7O8ONmY8wmPf', 

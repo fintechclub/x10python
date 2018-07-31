@@ -27,32 +27,38 @@ class BotHelper:
         self.dispatcher.add_handler(account_handler)
         self.dispatcher.add_handler(unknown_handler)
 
+    #обработчик команды /start
     def _startCommand(self, bot, update):
         user = update.message.from_user
         bot.send_message(chat_id=update.message.chat_id, 
                          text="Приветствую тебя %s!  Что интересует? Я знаю команды:\n 1. /acc 'код аккаунта'\n\n Вот какие аккаунты мне известны: %s" % (user["first_name"], ', '.join(self.availAcc)))
 
+    #обработчик команды /echo    
     def _echoCommand(self, bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
+    #обработчик команды /caps    
     def _capsCommand(self, bot, update, args):
         text_caps = ' '.join(args).upper()
         bot.send_message(chat_id=update.message.chat_id, text=text_caps)
 
+    #обработчик команды /acc    
     def _accCommand(self, bot, update, args):
         msg = '' if len(args) == 1 and args[0] in self.availAcc else "Для выполнения команды мне нужен аргумент. Одно из следующих значений: " + ', '.join(self.availAcc)
 
         if msg == '':
             acc_code = args[0]
-            msg = self.accCreator.getAccount(acc_code).getCommonAccountInfo() if acc_code in self.availAcc else "Я тебя не понимаю, Брат!"
+            msg = self.accCreator.getAccount(acc_code).getCommonAccountInfo() if acc_code in self.availAcc else "Такого аккаунта я не знаю("
 
         bot.send_message(chat_id=update.message.chat_id, text=msg)
 
+    #Обработчик неизвестной команды
     def _unknownCommand(self, bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text="Извини, Брат. Я не знаю этой команды😔")
+        bot.send_message(chat_id=update.message.chat_id, text="Я не знаю этой команды😔")
     
     def test(self, acc_code):
         print(self.accCreator.getAccount(acc_code).getCommonAccountInfo())
         
+    #Запуск слушателя команд бота    
     def start(self): 
         self.updater.start_polling()

@@ -4,6 +4,7 @@
 import sys
 from x10project import AssetMonitor, WalletAddressMonitor, BotHelper, PortfolioMonitor
 import pprint
+from x10project import AccountCreator
 
 def main():
     # print command line arguments
@@ -22,6 +23,9 @@ def main():
         elif arg == "startBot":
             bot = BotHelper()
             bot.start()
+        elif arg == "test":    
+            accCreator = AccountCreator()
+            print(accCreator.getAccount("andrey").getCommonAccountInfo())
         elif arg == "portfolio":
             portfolio = PortfolioMonitor()
             portfolio.CheckPortfolio()

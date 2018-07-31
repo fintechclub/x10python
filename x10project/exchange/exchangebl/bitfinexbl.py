@@ -9,7 +9,7 @@ from x10project import BaseExchangeBL, BitfinexClient
 # https://docs.bitfinex.com/docs/introduction
 class BitfinexLogic(BaseExchangeBL):
 
-    def __init__(self, acc_name='', account_name='', api_key='', api_secret=''):
+    def __init__(self, account_name='', api_key='', api_secret=''):
         super().__init__("bitfinex", account_name, api_key, api_secret)
         self.bitfinexClient = BitfinexClient(self.api_key, self.api_secret)
         locale.setlocale(locale.LC_ALL, 'en_US.utf-8')
@@ -48,8 +48,8 @@ class BitfinexLogic(BaseExchangeBL):
         return msg
 
     #Возвращает просадку от баланса при срабатывании стопов (в абсолютном выражении, в процентах) 
-    def checkAccountStopLostRisk(self, balance, orders):
-        return -40
+    def calculateAccountStopLostRisk(self, balance, orders):
+        return 0
     
     
     def getBalance(self):
@@ -87,13 +87,23 @@ class BitfinexLogic(BaseExchangeBL):
 
         return orders_list
     
+    def _positionToString(self, positions):
+        
+        result=''
+        for item in positions:
+            result += '🔹 Инстумент: {:s}, Количество: {:.2f}, Базовая цена: {:s}, PL: {:s}\n'.format(item[0], 
+                                                                                                    item[1],
+                                                                                                    locale.currency(item[2], grouping=True),
+                                                                                                    locale.currency(item[3], grouping=True))
+        return result
+        
     
     def getCommonAccountInfo(self):
         balance = self.getBalance()
         positions = self.getPositions()
         orders = self.getOrders()
 
-        checkError = "Не удалось прочитать данные по указанным API ключам" if balance == None or orders == None or api_positions == None else ''
+        checkError = "Не удалось прочитать данные по указанным API ключам" if balance == None or orders == None or positions == None else ''
         
         if checkError != '': 
             return checkError
@@ -106,10 +116,11 @@ class BitfinexLogic(BaseExchangeBL):
 
         pl = sum(x[3] for x in positions) 
         commonProfit = self.calculateAccountStopLostRisk(balance, orders)
-        return "\nОткрыто позиций: {:d}, \nБаланс: {:s}, \nPL: {:s},  \nБаланс(PL): {:s} ({:.2f}%), \nОбщий риск баланса по стопам: {:.2f}% \n".format(len(positions), 
+        return "\nОткрыто позиций: {:d}, \nДанные по позициям: \n{:s} \nБаланс аккаунта: {:s}, \nPL: {:s},  \nБаланс(PL): {:s} ({:.2f}%), \nОбщий риск баланса по стопам: {:.2f}% \n".format(len(positions),  
+                 self._positionToString(positions),
                  locale.currency(balance, grouping=True), 
                  locale.currency(pl, grouping=True), 
                  locale.currency(balance + pl, grouping=True), 
-                 ((balance + pl)/balance-1)*100,
+                 ((balance + pl) / balance - 1) * 100,
                 commonProfit)
         

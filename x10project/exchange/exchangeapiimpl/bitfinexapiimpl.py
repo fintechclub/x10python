@@ -9,7 +9,7 @@ import requests
 
 # Bitfinex API documentation
 # https://docs.bitfinex.com/docs
-class BitfinexClient(object):
+class BitfinexClient:
     def __init__(self, key, secret):    
         self.BASE_URL = "https://api.bitfinex.com/"
         self.KEY = key
@@ -41,11 +41,12 @@ class BitfinexClient(object):
         rawBody = json.dumps(body)
         headers = self._headers("{0:s}/{1:s}".format(api_ver, path), nonce, rawBody)
         url = "{0:s}{1:s}/{2:s}".format(self.BASE_URL, api_ver, path)
-        response = requests.post(url, headers=headers, data=rawBody, verify=True)
+        response = requests.post(url, headers = headers, data = rawBody, verify = True)
         if response.status_code == 200:
             return response.json()
         else:
             print('error, status_code = ', response.status_code)
+            print(response)
             return 'ERROR'
         
     def _reqP(self, path, api_ver = '', params = {}):
