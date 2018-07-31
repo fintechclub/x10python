@@ -25,7 +25,7 @@ def main():
             bot.start()
         elif arg == "test":    
             accCreator = AccountCreator()
-            print(accCreator.getAccount("andrey").getCommonAccountInfo())
+            print(accCreator.getAccount("arsen").getCommonAccountInfo())
         elif arg == "portfolio":
             portfolio = PortfolioMonitor()
             portfolio.CheckPortfolio()

@@ -120,11 +120,14 @@ class BitfinexLogic(BaseExchangeBL):
         if checkError != '': 
             return checkError
 
-        #print(colored("\n---My Orders---", "green"))
-        #pprint.pprint(orders)    
+        print(colored("\n---Balance---", "green"))
+        pprint.pprint(balance)
         
-        #print(colored("\n---My Positions---", "green"))
-        #pprint.pprint(positions)    
+        print(colored("\n---My Orders---", "green"))
+        pprint.pprint(orders)    
+        
+        print(colored("\n---My Positions---", "green"))
+        pprint.pprint(positions)    
 
         pl = sum(x[3] for x in positions) 
         commonProfit = self.calculateAccountStopLostRisk(balance, orders)
@@ -133,6 +136,6 @@ class BitfinexLogic(BaseExchangeBL):
                  locale.currency(balance, grouping=True), 
                  locale.currency(pl, grouping=True), 
                  locale.currency(balance + pl, grouping=True), 
-                 ((balance + pl) / balance - 1) * 100,
+                 ((balance + pl) / (balance-1 if balance > 0 else pl)) * 100,
                 commonProfit)
         
