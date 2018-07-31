@@ -22,7 +22,7 @@ def UserEventCallback(msg):
         order_id = msg['i']
         
         
-        message = "Зарегистрировано новое событие:\n -Статус: {:s}\n -Направление: {:s}\n -Торговая пара: {:s}\n -Цена: {:s}\n -Количество: {:s}\n -Тип: {:s}\n -Идентификатор: {:s}".format(convertOrderStatus(order_status), 
+        message = "Зарегистрировано новое событие:\n -Статус: {:s} ({:s})\n -Направление: {:s}\n -Торговая пара: {:s}\n -Цена: {:s}\n -Количество: {:s}\n -Тип: {:s}\n -Идентификатор: {:s}".format(convertOrderStatus(order_status), order_status, 
                                             order_side,
                                             order_pair,  
                                             order_price, 

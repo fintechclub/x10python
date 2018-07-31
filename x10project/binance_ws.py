@@ -132,7 +132,7 @@ data={"order_buy":0,
 sellOrders = {}
 buyOrders  = {}
 total_data = {"first_price": 0, 
-              "order_buy"  : 0, 
+
               "order_sell" : 0, 
               "total_buy"  : 0, 
               "total_sell" : 0,
