@@ -7,8 +7,7 @@ import datetime
 from termcolor import colored
 import sys
 
-def callback(msg):
-    
+def callback(msg): 
     global last_time
     global sellOrders
     global buyOrders
@@ -120,6 +119,7 @@ def UserEventCallback(msg):
     
     
     
+
 
 data={"order_buy":0,
      "order_sell":0,

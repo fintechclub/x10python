@@ -20,13 +20,18 @@ def UserEventCallback(msg):
         order_price = msg['p']
         order_status = msg['X']
         order_id = msg['i']
+        
+        
         message = "Зарегистрировано новое событие:\n -Статус: {:s}\n -Направление: {:s}\n -Торговая пара: {:s}\n -Цена: {:s}\n -Количество: {:s}\n -Тип: {:s}\n -Идентификатор: {:s}".format(convertOrderStatus(order_status), 
-                                                order_side,
-                                                order_pair,  
-                                                order_price, 
-                                                order_qty, 
-                                                order_type,
-                                                str(order_id))
+                                            order_side,
+                                            order_pair,  
+                                            order_price, 
+                                            order_qty, 
+                                            order_type,
+                                            str(order_id))
+        if order_status == "REJECTED":
+            message +=  "\n -Причина отказа: {:s}".format(msg['r'])
+        
         messageSender.sendMessage(message)
     
 def convertOrderStatus(statusCode):
@@ -34,6 +39,8 @@ def convertOrderStatus(statusCode):
     elif statusCode == "CANCELED": return "Отменен"
     elif statusCode == "TRADE": return "Исполнен"
     elif statusCode == "EXPIRED": return "Просрочен"
+    elif statusCode == "REJECTED": return "Просрочен"
+    
     else: return "Статус неизвестен"
     
     

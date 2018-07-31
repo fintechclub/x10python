@@ -13,14 +13,12 @@ from x10project.utils.enums import *
 
 class PortfolioMonitor:
     def __init__(self):
-        self.CREDENTIALS_FILE = 'test-proj-for-habr-article-1ab131d98a6b.json'  # имя файла с закрытым ключом
+        package_dir = os.path.abspath(os.path.dirname(__file__))
+        CREDENTIALS_FILE = os.path.join(package_dir, 'google_service_account.json')  # имя файла с закрытым ключом
         self.SPREADSHEET_ID = '1nGFnlQ7EGio0nULtyU_jVXoX1XmwHFbpndZT_6QeGvo'
         self.PORTFOLIO_SHEET_NAME = "New Portfolio"
-        package_dir = os.path.abspath(os.path.dirname(__file__))
         locale.setlocale(locale.LC_ALL, 'en_US.utf-8')
-        credential_file = os.path.join(package_dir, 'google_service_account.json')
-       
-        credentials = ServiceAccountCredentials.from_json_keyfile_name(credential_file,      
+        credentials = ServiceAccountCredentials.from_json_keyfile_name(CREDENTIALS_FILE,      
                                                                             ['https://www.googleapis.com/auth/spreadsheets.readonly',
                                                                                   'https://www.googleapis.com/auth/drive'])
         httpAuth = credentials.authorize(Http())
@@ -58,8 +56,6 @@ class PortfolioMonitor:
         
         for item in portfolio:
             item.append( *(price["current_price"] for price in prices if price["id"] == item[1]) )
-        
-        
         
         #Сколько было потрачено на формирование портфеля, BTC
         originPriceBTC = sum(item[2] for item in portfolio)
