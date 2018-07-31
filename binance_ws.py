@@ -41,7 +41,7 @@ def convertOrderStatus(statusCode):
     elif statusCode == "EXPIRED": return "Просрочен"
     elif statusCode == "REJECTED": return "Просрочен"
     
-    else: return "Статус неизвестен"
+    else: return "Статус неизвестен(?)"
     
     
     

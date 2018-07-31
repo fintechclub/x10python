@@ -92,7 +92,7 @@ class BitfinexLogic(BaseExchangeBL):
         
         result=''
         for item in positions:
-            result += '🔹 Инстумент: {:s},\n   Количество: {:.2f},\n   Базовая цена: {:s},\n   Текущая цена: {:s},\n   Цена ликвидации: {:s},\n   PL: {:s}\n'.format(item[0], 
+            result += '🔹 Инструмент: {:s},\n   Количество: {:.2f},\n   Базовая цена: {:s},\n   Текущая цена: {:s},\n   Цена ликвидации: {:s},\n   PL: {:s}\n'.format(item[0], 
                             item[1],
                             locale.currency(item[2], grouping=True),
                             locale.currency(prices[item[0]], grouping=True),
@@ -120,6 +120,7 @@ class BitfinexLogic(BaseExchangeBL):
         if checkError != '': 
             return checkError
 
+        '''
         print(colored("\n---Balance---", "green"))
         pprint.pprint(balance)
         
@@ -128,7 +129,7 @@ class BitfinexLogic(BaseExchangeBL):
         
         print(colored("\n---My Positions---", "green"))
         pprint.pprint(positions)    
-
+        '''
         pl = sum(x[3] for x in positions) 
         commonProfit = self.calculateAccountStopLostRisk(balance, orders)
         return "\nОткрыто позиций: {:d}, \nДанные по позициям: \n{:s} \nБаланс аккаунта: {:s}, \nPL: {:s},  \nБаланс(PL): {:s} ({:.2f}%), \nОбщий риск баланса по стопам: {:.2f}% \n".format(len(positions),  
