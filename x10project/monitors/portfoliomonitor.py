@@ -41,7 +41,7 @@ class PortfolioMonitor:
         return results['values'] 
         
 
-    def CheckPortfolio(self):
+    def CheckPortfolio(self, returnText=False):
         amountAssetsInPortfolio = self.getAssetAmount()
         assets = self.getAssets(amountAssetsInPortfolio)
         
@@ -82,5 +82,8 @@ class PortfolioMonitor:
                                                                                                 locale.currency(currentPriceUSD - originPriceUSD, grouping=True),
                                                                                                 profitUSD)
         
+        if returnText == True:
+            return message
+        else:
         #Стоимость портфеля сегодня, USD
-        self.messageSender.sendMessage(message)
+            self.messageSender.sendMessage(message)
