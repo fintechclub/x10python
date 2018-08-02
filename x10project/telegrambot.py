@@ -74,7 +74,7 @@ class BotHelper:
     #обработчик    
     def _button(self, bot, update):    
         query = update.callback_query
-        acc_code = update.message.text
+        acc_code = query.data
         print(acc_code)
         
         msg = '' if acc_code in self.availAcc else "Для выполнения команды мне нужен аргумент. Одно из следующих значений: " + ', '.join(self.availAcc)
@@ -82,7 +82,12 @@ class BotHelper:
         if msg == '':
             msg = self.accCreator.getAccount(acc_code).getCommonAccountInfo() if acc_code in self.availAcc else "Такого аккаунта я не знаю("
 
-        update.message.reply_text(msg, reply_markup = self.account_menu_markup)    
+        
+        bot.edit_message_text(text=msg,
+                          chat_id=query.message.chat_id,
+                          message_id=query.message.message_id)
+        
+        #update.message.reply_text(msg, reply_markup = self.account_menu_markup)    
         
     
         
