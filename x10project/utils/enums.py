@@ -11,6 +11,7 @@ class Exchange(Enum):
     KUCOIN = 4
     IDEX = 5
     OKEX = 6
+    ALL = 7
     
 class TelegramRecipient(Enum):
     ARBITRAGE_GROUP="-318829342"

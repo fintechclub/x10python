@@ -15,7 +15,7 @@ class BaseExchangeBL:
         self.dba = DataBaseAccess()
         self.api_key = api_key
         self.api_secret = api_secret
-        self.messageSender = MessageSender(MessageType.TELEGRAM)
+        self.messageSender = MessageSender(MessageType.CONSOLE)
 
     def getExchangeName(self):
         return self.exchangeName

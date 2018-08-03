@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 import requests
 
-class HitBTCClient(object):
-    def __init__(self, public_key, secret):
+class HitBTCClient:
+    def __init__(self, api_key, api_secret):
         self.url = "https://api.hitbtc.com/api/2"
         self.session = requests.session()
-        self.session.auth = (public_key, secret)
+        self.session.auth = (api_key, api_secret)
 
     def get_symbol(self, symbol_code=""):
         """Get symbol."""

@@ -10,10 +10,10 @@ import requests
 # Bitfinex API documentation
 # https://docs.bitfinex.com/docs
 class BitfinexClient:
-    def __init__(self, key, secret):    
+    def __init__(self, api_key, api_secret):    
         self.BASE_URL = "https://api.bitfinex.com/"
-        self.KEY = key
-        self.SECRET = secret
+        self.KEY = api_key
+        self.SECRET = api_secret
         self.API_V2 = "v2"
         self.API_V1 = "v1"
         self.session = requests.session()

@@ -2,6 +2,7 @@ from .database.databaseaccess import DataBaseAccess
 from .services.ext.coingeckoimpl import CoinGeckoClient
 from .exchange.exchangeapiimpl.bitfinexapiimpl import BitfinexClient
 from .exchange.exchangeapiimpl.hitbtcapiimpl import HitBTCClient
+from .exchange.exchangeapiimpl.okexapiimpl import OKexClient
 from .exchange.exchangebl.baseexchangebl import BaseExchangeBL
 from .exchange.exchangebl.binancebl import BinanceLogic
 from .exchange.exchangebl.bittrexbl import BittrexLogic
@@ -23,4 +24,4 @@ from .telegrambot import BotHelper
 
 __author__ = 'korovaevda@gmail.com'
 
-__all__ = ['DataBaseAccess', 'AssetMonitor', 'WalletAddressMonitor', 'BaseExchangeBL', 'BinanceLogic', 'BittrexLogic', 'BitfinexLogic', 'HitBTCLogic', 'IdexLogic', 'KucoinLogic', 'OkexLogic', 'BitfinexClient', 'HitBTCClient', 'AccountCreator', 'BotHelper', 'CoinGeckoClient', 'PortfolioMonitor']
+__all__ = ['DataBaseAccess', 'AssetMonitor', 'WalletAddressMonitor', 'BaseExchangeBL', 'BinanceLogic', 'BittrexLogic', 'BitfinexLogic', 'HitBTCLogic', 'IdexLogic', 'KucoinLogic', 'OkexLogic', 'BitfinexClient', 'HitBTCClient', 'OKexClient', 'AccountCreator', 'BotHelper', 'CoinGeckoClient', 'PortfolioMonitor']

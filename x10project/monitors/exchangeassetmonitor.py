@@ -20,15 +20,17 @@ class AssetMonitor:
                               Exchange.OKEX: OkexLogic()
                             }
         
-    def CheckAsset(self):
-        
+    def CheckAsset(self, exchange=Exchange.ALL):
         print('%s  ----Start AssetMonitor.CheckAsset----' % (datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         
-        for key, value in self.exchangeClients.items():
-            try:
-                value.checkListedAssets()
-            except Exception as e:
-                print("%s.checkListedAssets error request. Exception %s" % (value.__class__.__name__, str(e)))       
+        if exchange != Exchange.ALL and exchange in self.exchangeClients:
+            self.exchangeClients[exchange].checkListedAssets()
+        else:
+            for key, value in self.exchangeClients.items():
+                try:
+                    value.checkListedAssets()
+                except Exception as e:
+                    print("%s.checkListedAssets error request. Exception %s" % (value.__class__.__name__, str(e)))       
 
         print('----End process AssetMonitor.CheckAsset----')
         
