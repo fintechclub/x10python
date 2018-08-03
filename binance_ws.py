@@ -40,6 +40,7 @@ def convertOrderStatus(statusCode):
     elif statusCode == "TRADE": return "Исполнен"
     elif statusCode == "EXPIRED": return "Просрочен"
     elif statusCode == "REJECTED": return "Отклонен"
+    elif statusCode == "FILLED": return "Исполнен"
     
     else: return "Статус неизвестен(?)"
     
