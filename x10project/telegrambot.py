@@ -23,7 +23,7 @@ class BotHelper:
                             ['🔒 Item3','🔒 Item4']]
         
         #Маркап для основного меню
-        self.main_menu_markup = ReplyKeyboardMarkup(main_menu_keyboard, one_time_keyboard=False)
+        self.main_menu_markup = ReplyKeyboardMarkup(main_menu_keyboard, one_time_keyboard=False, resize_keyboard=True)
         #Маркап для меню в пункте Account
         keyboard = [[InlineKeyboardButton("Андрей", callback_data='andrey'),
                  InlineKeyboardButton("Рустам", callback_data='rustam')],

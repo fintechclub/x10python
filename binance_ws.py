@@ -32,7 +32,8 @@ def UserEventCallback(msg):
         if order_status == "REJECTED":
             message +=  "\n -Причина отказа: {:s}".format(msg['r'])
         
-        messageSender.sendMessage(message)
+        if (order_status != "FILLED":)
+            messageSender.sendMessage(message)
     
 def convertOrderStatus(statusCode):
     if statusCode == "NEW": return "Создан новый"
