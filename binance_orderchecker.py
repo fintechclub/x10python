@@ -32,7 +32,7 @@ def UserEventCallback(msg):
         if order_status == "REJECTED":
             message +=  "\n -Причина отказа: {:s}".format(msg['r'])
         
-        if order_status != "FILLED":
+        if order_status != "FILLED" and order_status != "PARTIALLY_FILLED":
             messageSender.sendMessage(message)
     
 def convertOrderStatus(statusCode):
@@ -42,6 +42,8 @@ def convertOrderStatus(statusCode):
     elif statusCode == "EXPIRED": return "Просрочен"
     elif statusCode == "REJECTED": return "Отклонен"
     elif statusCode == "FILLED": return "Исполнен"
+    elif statusCode == "PARTIALLY_FILLED": return "Частично исполнен"
+    
     
     else: return "Статус неизвестен(?)"
     
