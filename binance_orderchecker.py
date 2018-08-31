@@ -82,8 +82,8 @@ def convertOrderStatus(statusCode):
     
     
 messageSender = MessageSender(MessageType.TELEGRAM)
-#messageSender.setTelegramRecipient(TelegramRecipient.ARBITRAGE_GROUP)
-messageSender.setTelegramRecipient(TelegramRecipient.KOROVAEV_USER)
+messageSender.setTelegramRecipient(TelegramRecipient.ARBITRAGE_GROUP)
+#messageSender.setTelegramRecipient(TelegramRecipient.KOROVAEV_USER)
 
 clientArbitrageExmo = BinanceClient("cpVoAC6GOvchaOtNKEBevnKypS2ruQoz5VMoCZHmF2GqoiVkaQiHGO8eFObwXkPn", "xaLFuFrLUL89pnXRTwKcLggT7HgLD3rcKSzWGza6ZHE9twsvD5HsQqwrRGJHGWQO")
 
