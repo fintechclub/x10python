@@ -54,7 +54,7 @@ def ExecutionReportEventHandler(msg, clientType):
     if order_type == "MARKET" and float(msg['z']) > 0:
         order_price = float(msg['Z']) / float(msg['z'])
         
-    if order_type == "MARKET"
+    if order_type == "MARKET":
         print("Z - {:s} \n".format( msg['Z']))
         print("z - {:s} \n".format(msg['z']))
 
