@@ -53,6 +53,10 @@ def ExecutionReportEventHandler(msg, clientType):
 
     if order_type == "MARKET" and float(msg['z']) > 0:
         order_price = float(msg['Z']) / float(msg['z'])
+        
+    if order_type == "MARKET"
+        print("Z - {:s} \n".format( msg['Z']))
+        print("z - {:s} \n".format(msg['z']))
 
     message = "Зарегистрировано новое событие:\n -Арбитраж с биржей: {:s}\n -Статус: {:s} ({:s})\n -Тип ордера: {:s}\n -Направление: {:s}\n -Торговая пара: {:s}\n -Цена: {:.5f}\n -Количество: {:s}".format(clientType,
                                         convertOrderStatus(order_status), order_status, 
