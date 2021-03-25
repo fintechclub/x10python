@@ -51,7 +51,7 @@ python-idex==0.2.7
 python-kucoin==0.1.12
 python-telegram-bot==10.1.0
 pytz==2018.4
-PyYAML==3.12
+PyYAML==5.4
 regex==2018.6.21
 repoze.lru==0.7
 requests==2.19.1
